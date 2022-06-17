@@ -14,22 +14,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    int drinkCountTotal;
+    public static int drinkCountTotal;
     Button btn;
     public static List<Order> currentOrder = new ArrayList<>();
 
-
-    public static void updateOrder(Order order){
-        if (order.drink.type == "latte"){
-            currentOrder.add(order);
-        } // add more elseif for other types
-    }
 
 
     @Override
@@ -46,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
-                intent.putExtra("totalOrder", (Serializable) currentOrder);
-
                 startActivity(intent);
             }
         });
@@ -63,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         //what happens when drink counter is clicked
         TextView drinksInCartTotalTV = findViewById(R.id.drinksInCartTV);
-        drinksInCartTotalTV.setText(Integer.toString(drinkCountTotal));
+        drinksInCartTotalTV.setText(String.valueOf(drinkCountTotal));
         drinksInCartTotalTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
